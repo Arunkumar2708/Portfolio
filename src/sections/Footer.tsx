@@ -29,8 +29,7 @@ const Footer: React.FC = () => {
           {/* Copyright */}
           <div className="text-center md:text-center  items-center justify-center">
             <p className="text-sm">
-              © {new Date().getFullYear()} <span className="font-semibold text-white">Arunkumar</span>.  
-              All Rights Reserved.
+              © {new Date().getFullYear()} <span className="font-semibold text-white">Designed By Arunkumar</span>.  
             </p>
           </div>
 
