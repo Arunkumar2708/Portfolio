@@ -48,7 +48,7 @@ const skills: { category: string; items: Skill[] }[] = [
 
 const Skills: React.FC = () => {
   return (
-    <section id="skills" className="relative pb-34 pt-34 overflow-hidden">
+    <section id="skills" className="relative  pt-20 overflow-hidden">
 
       {/* Abstract Background Blobs */}
       <div className="absolute top-25 left-0 w-60 h-60 bg-black/10  rounded-[40%] blur-3xl -z-10"></div>

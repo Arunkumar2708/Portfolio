@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
  
   }} >
      <section
-      id="hero"
+      id="#"
       className="flex flex-col-reverse md:flex-row items-end  justify-between container mx-auto px-6 "
    >
       {/* Left Content */}

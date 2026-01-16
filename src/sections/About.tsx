@@ -6,7 +6,7 @@ const About: React.FC = () => {
   return (
     <section
       id="about"
-      className="relative pb-3 bg-white overflow-hidden"
+      className="relative pt-20 pb-3 bg-white overflow-hidden"
     > 
       {/* Abstract Black Shapes */}
       <div className="absolute left-10 top-20 w-40 h-40 bg-black rounded-full opacity-10 blur-2xl -z-10"></div>
