@@ -6,7 +6,7 @@ const cards = [
     title: "Location",
     value: "Sambavarvadakarai, Tenkasi - 627856",
     icon: "mdi:map-marker",
-    link:"https://www.google.com/maps/place/Sambavarvadakarai,+Tamil+Nadu+627856/@9.0021986,77.3926113,3450m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3b069d3afd762bad:0x3ffa9855713268ab!8m2!3d9.0021219!4d77.3936415!16zL20vMGY2NWtw?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D",
+    link: "https://www.google.com/maps/place/Sambavarvadakarai,+Tamil+Nadu+627856/@9.0021986,77.3926113,3450m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3b069d3afd762bad:0x3ffa9855713268ab!8m2!3d9.0021219!4d77.3936415!16zL20vMGY2NWtw?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D",
   },
   {
     title: "Contact",
@@ -42,18 +42,27 @@ const Contact: React.FC = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => entry.isIntersecting && setVisible(true),
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
     ref.current && observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section id="contact" className="py-20  bg-gradient-to-t from-gray-300/40 to-transparent">
-      <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-3xl font-bold text-gray-800 mb-14 text-center border-b-2 border-gray-100 pb-5">
-          Let’s Contact !
-        </h2>
+    <section
+      id="contact"
+      className="pt-15 pb-20  relative overflow-hidden bg-white"
+    >
+      {/* <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-100/50 rounded-full blur-3xl" /> */}
+      <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-fuchsia-100/50 rounded-full blur-3xl" />
+
+      <div className="container mx-auto px-4 md:px-6 text-center">
+        <div className="inline-block mb-12">
+          <h2 className="text-4xl font-bold text-gray-800 mb-2">
+            Let’s Contact !
+          </h2>
+          <div className="h-1.5 w-16 bg-gradient-to-r from-purple-600 to-fuchsia-600 mx-auto rounded-full" />
+        </div>
 
         {/* Grid */}
         <div
@@ -74,9 +83,11 @@ const Contact: React.FC = () => {
                   border border-gray-300 group cursor-pointer
                   transition-all duration-700 bg-white
                   ${index >= 3 ? "md:translate-x-1/2" : ""}
-                  ${visible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"}
+                  ${
+                    visible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-10"
+                  }
                 `}
                 style={{ transitionDelay: `${index * 120}ms` }}
               >
@@ -93,14 +104,21 @@ const Contact: React.FC = () => {
                 <div className="relative z-10 text-gray-900 group-hover:text-white transition-colors duration-300">
                   <div className="flex items-center gap-6 p-4">
                     {/* Icon with ripple */}
-                    <div className="relative w-12 h-12 rounded-full bg-white/20 
+                    <div
+                      className="relative w-12 h-12 rounded-full bg-white/20 
                                     flex items-center justify-center text-white
-                                    overflow-hidden">
-                      <span className="absolute inset-0 bg-white/30 
+                                    overflow-hidden"
+                    >
+                      <span
+                        className="absolute inset-0 bg-white/30 
                                        scale-0 group-hover:scale-150 
                                        opacity-0 group-hover:opacity-100
-                                       transition-all duration-700 rounded-full" />
-                      <Icon icon={card.icon} className="text-2xl relative z-10" />
+                                       transition-all duration-700 rounded-full"
+                      />
+                      <Icon
+                        icon={card.icon}
+                        className="text-2xl relative z-10"
+                      />
                     </div>
 
                     <div className="flex-1">
@@ -112,7 +130,7 @@ const Contact: React.FC = () => {
                   </div>
 
                   <div className="flex  px-4 pl-20">
-                    <p className="text-sm opacity-80  break-words">
+                    <p className="text-sm opacity-80  line-clamp-3 break-words">
                       {card.value}
                     </p>
                   </div>

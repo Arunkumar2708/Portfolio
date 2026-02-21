@@ -1,74 +1,137 @@
-// src/components/About.tsx
-import React from "react";
-import bgImg from "../assets/ChatGPT Image Dec 21, 2025, 07_22_29 PM.png"
+import React, { useEffect, useRef, useState } from "react";
+import bgImg from "../assets/ChatGPT Image Dec 21, 2025, 07_22_29 PM.png";
 import { Icon } from "@iconify/react";
+
 const About: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.2 },
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="about"
-      className="relative pt-20 pb-3 bg-white overflow-hidden"
-    > 
-      {/* Abstract Black Shapes */}
-      <div className="absolute left-10 top-20 w-40 h-40 bg-black rounded-full opacity-10 blur-2xl -z-10"></div>
-      <div className="absolute right-0 top-40 w-64 h-64 bg-gray-900 rounded-full opacity-5 blur-3xl -z-10"></div>
-      <div className="absolute left-1/2 bottom-0 w-96 h-96 bg-gray-800 rounded-full opacity-5 blur-3xl -z-10 translate-x-1/2"></div>
+      className="relative pt-20 pb-16 bg-white overflow-hidden"
+    >
+      {/* Animated Background Shapes */}
+      <div
+        className={`absolute left-10 top-20 w-40 h-40 bg-purple-200 rounded-full opacity-20 blur-2xl -z-10 transition-all duration-[2000ms] ${isVisible ? "translate-x-10" : ""}`}
+      ></div>
+      <div
+        className={`absolute right-0 top-40 w-64 h-64 bg-fuchsia-200 rounded-full opacity-20 blur-3xl -z-10 transition-all duration-[3000ms] ${isVisible ? "-translate-y-10" : ""}`}
+      ></div>
 
-      <div className="container mx-auto px-6 md:px-12 lg:px-10 text-center">
-         <h2 className="text-3xl font-bold text-gray-800 mb-12 border-b border-gray-300 pb-5 ">About</h2>
-        <div className=" mx-auto grid md:grid-cols-2 gap-10 items-center">
-          
-          {/* Left Graphic Area */}
-          <div className="relative">
-            {/* <div className="absolute -top-10 -left-5 w-56 h-56 bg-yellow-400 rounded-[3rem] rotate-6 opacity-90 shadow-xl"></div> */}
+      <div className="container mx-auto px-6 md:px-12 lg:px-10">
+        {/* Section Title Animation */}
+        <div
+          className={`text-center mb-16 transition-all duration-1000 ${isVisible ? "opacity-100" : "opacity-0 translate-y-10"}`}
+        >
+          <div className="inline-block">
+            <h2 className="text-4xl font-bold text-gray-800 mb-2">About Me</h2>
+            <div className="h-1.5 w-16 bg-gradient-to-r from-purple-600 to-fuchsia-600 mx-auto rounded-full" />
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Left Graphic Area - Slides from Left */}
+          <div
+            className={`relative transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-20"}`}
+          >
+            <div className="absolute inset-0 bg-gradient-to-tr from-purple-100 to-transparent rounded-full blur-2xl scale-75 animate-pulse" />
             <img
               src={bgImg}
               alt="profile"
-              className="relative z-10  mx-auto drop-shadow-xl"
+              className="relative z-10 mx-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
             />
           </div>
 
-          {/* Right Text Area */}
-          <div>
-            <h2 className="text-4xl font-extrabold text-gray-900 leading-tight text-start">
-              Need Creative Design?<br />
-              <span className="text-gray-700">I can Help You!</span>
+          {/* Right Text Area - Slides from Right */}
+          <div
+            className={`transition-all duration-1000 delay-400 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-20"}`}
+          >
+            <h2 className="text-4xl font-extrabold text-gray-900 leading-tight">
+              Need Creative Design?
+              <br />
+              <span className="bg-gradient-to-r from-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
+                I can Help You!
+              </span>
             </h2>
 
-            <p className="mt-6 text-gray-600 text-lg leading-relaxed text-start">
+            <p className="mt-6 text-gray-600 text-lg leading-relaxed">
               I’m a UI/UX Designer with a strong focus on clean, minimal, and
               modern interfaces. I create designs that not only look good but
               also work intuitively and effectively.
             </p>
 
-            {/* Skills badges */}
+            {/* Skills badges - Staggered Appearance */}
             <div className="mt-6 flex flex-wrap gap-3">
-              {["Angular", "React", "Bootstrap", "Tailwind", "Ionic" ,"React Native"].map((item) => (
+              {[
+                "Angular",
+                "React",
+                "Bootstrap",
+                "Tailwind",
+                "Ionic",
+                "React Native",
+              ].map((item, i) => (
                 <span
                   key={item}
-                  className="px-4 py-2 text-sm font-semibold bg-black text-white rounded-full shadow-md hover:bg-gray-800 transition"
+                  style={{ transitionDelay: `${700 + i * 100}ms` }}
+                  className={`px-4 py-2 text-sm font-semibold bg-gray-900 text-white rounded-full shadow-md hover:bg-purple-600 hover:-translate-y-1 transition-all duration-500 ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}
                 >
                   {item}
                 </span>
               ))}
-            </div> 
+            </div>
 
-            {/* Social icons */}
-           <div className="mt-8 flex gap-4">
-  <span className="p-3 bg-black text-white rounded-full hover:bg-gray-700 cursor-pointer">
-    <Icon icon="mdi:facebook" width="20" />
-  </span>
-
-  <span className="p-3 bg-black text-white rounded-full hover:bg-gray-700 cursor-pointer">
-    <Icon icon="mdi:instagram" width="20" />
-  </span>
-
-  <span className="p-3 bg-black text-white rounded-full hover:bg-gray-700 cursor-pointer">
-    <Icon icon="mdi:linkedin" width="20" />
-  </span>
-</div>
-
+            {/* Social icons - Pop-in effect */}
+            {/* Social icons - Pop-in effect with Links */}
+            <div
+              className={`mt-8 flex gap-4 transition-all duration-700 delay-1000 ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-5"
+              }`}
+            >
+              {[
+                {
+                  id: "linkedin",
+                  icon: "linkedin",
+                  url: "https://linkedin.com/in/arun-kumar-a-513ba7226",
+                },
+                {
+                  id: "github",
+                  icon: "github",
+                  url: "https://github.com/Arunkumar2708",
+                },
+                {
+                  id: "instagram",
+                  icon: "instagram",
+                  url: "https://www.instagram.com/arun_kumar_27_?igsh=MTN5cXN2dGIydHBkOQ==",
+                },
+              ].map((social) => (
+                <a
+                  key={social.id}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-gray-900 text-white rounded-full hover:bg-purple-600 hover:rotate-[360deg] transition-all duration-500 cursor-pointer shadow-lg flex items-center justify-center"
+                  aria-label={social.id}
+                >
+                  <Icon icon={`mdi:${social.icon}`} width="20" />
+                </a>
+              ))}
+            </div>
           </div>
-
         </div>
       </div>
     </section>
