@@ -5,6 +5,7 @@ import { ArrowRight, MessageSquare } from "lucide-react";
 const Hero: React.FC = () => {
   return (
     <div
+      id="home"
       className="relative min-h-screen flex items-center justify-center bg-cover bg-[25%_center] md:bg-center overflow-hidden"
       style={{
         backgroundImage: `url(${bgImg})`,
@@ -18,8 +19,7 @@ const Hero: React.FC = () => {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/20 rounded-full mix-blend-screen filter blur-[100px] animate-pulse-glow z-0"></div>
 
       {/* Hero Section Container */}
-      <section
-        id="home"
+      <div
         className="relative flex flex-col-reverse md:flex-row items-center justify-between w-full px-6 md:px-12 lg:px-20 py-24 md:py-32 z-10 gap-16"
       >
         {/* Left Content */}
@@ -107,7 +107,7 @@ const Hero: React.FC = () => {
         </div>
 
 
-      </section>
+      </div>
       {/* 👇 Bottom Divider Wave */}
       <div className="absolute bottom-0 left-0 right-0 overflow-hidden leading-[0] pointer-events-none z-10">
         <svg

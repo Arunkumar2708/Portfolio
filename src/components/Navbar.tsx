@@ -15,23 +15,40 @@ const Navbar: React.FC = () => {
   const [showResume, setShowResume] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id || "home");
+    const handleScroll = () => {
+      // If user is near the top of the page, force Home to be active
+      if (window.scrollY < 120) {
+        setActive("home");
+        return;
+      }
+
+      // If user has scrolled to the absolute bottom of the page, highlight Contact
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 20
+      ) {
+        setActive("contact");
+        return;
+      }
+
+      let currentActive = "home";
+      for (const section of sections) {
+        const el = document.getElementById(section.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          // If the section top is in the top portion of the screen (within 160px)
+          if (rect.top <= 160) {
+            currentActive = section.id;
           }
-        });
-      },
-      { rootMargin: "-50% 0px -50% 0px" },
-    );
+        }
+      }
+      setActive(currentActive);
+    };
 
-    sections.forEach(({ id }) => {
-      const el = id === "home" ? document.body : document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Trigger once on mount
 
-    return () => observer.disconnect();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Class for desktop links
