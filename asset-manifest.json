@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Portfolio/static/css/main.6f574727.css",
-    "main.js": "/Portfolio/static/js/main.39f70f43.js",
+    "main.css": "/Portfolio/static/css/main.20e82991.css",
+    "main.js": "/Portfolio/static/js/main.f0a87771.js",
     "static/js/453.d376e9ca.chunk.js": "/Portfolio/static/js/453.d376e9ca.chunk.js",
     "static/media/ChatGPT Image Dec 21, 2025, 07_22_29 PM.png": "/Portfolio/static/media/ChatGPT Image Dec 21, 2025, 07_22_29 PM.2101e2f5d694dc934c87.png",
     "static/media/Picsart_25-08-26_18-40-04-843.png": "/Portfolio/static/media/Picsart_25-08-26_18-40-04-843.49d7afb667f96ecd7f64.png",
@@ -12,12 +12,12 @@
     "static/media/Vehicle-Finance.png": "/Portfolio/static/media/Vehicle-Finance.fcf5e8fc3a5549822df0.png",
     "static/media/Billing.png": "/Portfolio/static/media/Billing.0ba95520671c7d26e8a6.png",
     "index.html": "/Portfolio/index.html",
-    "main.6f574727.css.map": "/Portfolio/static/css/main.6f574727.css.map",
-    "main.39f70f43.js.map": "/Portfolio/static/js/main.39f70f43.js.map",
+    "main.20e82991.css.map": "/Portfolio/static/css/main.20e82991.css.map",
+    "main.f0a87771.js.map": "/Portfolio/static/js/main.f0a87771.js.map",
     "453.d376e9ca.chunk.js.map": "/Portfolio/static/js/453.d376e9ca.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6f574727.css",
-    "static/js/main.39f70f43.js"
+    "static/css/main.20e82991.css",
+    "static/js/main.f0a87771.js"
   ]
 }
