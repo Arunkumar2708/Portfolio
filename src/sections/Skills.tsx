@@ -8,43 +8,44 @@ type Skill = {
   level: string;
 };
 
-const skills: { category: string; items: Skill[] }[] = [
+const skills: { category: string; description: string; items: Skill[] }[] = [
   {
-    category: "Frontend Frameworks",
+    category: "01. Design & Concept",
+    description: "Establishing wireframes, high-fidelity visual interfaces, and user journeys.",
     items: [
-      { name: "Angular", icon: "logos:angular-icon", level: "85%" },
-      { name: "React", icon: "logos:react", level: "90%" },
-      { name: "React Native", icon: "tabler:brand-react-native", level: "70%" },
+      { name: "Figma UI/UX Tool", icon: "logos:figma", level: "85%" },
+      { name: "Wireframing Layouts", icon: "mdi:draw", level: "80%" },
+      { name: "Interactive Prototype", icon: "mdi:application-brackets", level: "75%" },
     ],
   },
   {
-    category: "UI Libraries",
+    category: "02. Layout & Styling",
+    description: "Writing responsive styling matrices and pixel-perfect layouts.",
     items: [
-      { name: "Bootstrap", icon: "logos:bootstrap", level: "85%" },
-      { name: "Tailwind CSS", icon: "logos:tailwindcss-icon", level: "90%" },
-      { name: "Ionic", icon: "logos:ionic-icon", level: "70%" },
+      { name: "Tailwind CSS Grid", icon: "logos:tailwindcss-icon", level: "90%" },
+      { name: "Bootstrap Framework", icon: "logos:bootstrap", level: "85%" },
+      { name: "Mobile Responsiveness", icon: "mdi:responsive", level: "90%" },
     ],
   },
   {
-    category: "Tools",
+    category: "03. App Development",
+    description: "Developing robust single-page web codebases and mobile frameworks.",
     items: [
-      { name: "Git", icon: "logos:git-icon", level: "80%" },
-      { name: "Figma", icon: "logos:figma", level: "85%" },
-      // { name: "Adobe XD", icon: "logos:adobe-xd", level: "75%" },
-      { name: "VS Code", icon: "vscode-icons:file-type-vscode", level: "95%" },
+      { name: "React / React Native", icon: "logos:react", level: "90%" },
+      { name: "Angular Framework", icon: "logos:angular-icon", level: "85%" },
+      { name: "Ionic Hybrid App", icon: "logos:ionic-icon", level: "70%" },
     ],
   },
   {
-    category: "Other",
+    category: "04. Quality & Delivery",
+    description: "Deploying code updates, environment configuration, and task management.",
     items: [
-      { name: "Responsive Design", icon: "mdi:responsive", level: "90%" },
-      { name: "Wireframing", icon: "mdi:draw", level: "80%" },
-      { name: "Prototyping", icon: "mdi:application-brackets", level: "75%" },
+      { name: "Git Version Control", icon: "logos:git-icon", level: "80%" },
+      { name: "VS Code Environment", icon: "vscode-icons:file-type-vscode", level: "95%" },
     ],
   },
 ];
 
-// --- Sub-component for individual skill bars to handle their own animation ---
 const SkillBar: React.FC<{
   name: string;
   icon: string;
@@ -52,22 +53,22 @@ const SkillBar: React.FC<{
   isVisible: boolean;
 }> = ({ name, icon, level, isVisible }) => {
   return (
-    <li className="flex items-center space-x-4 group">
-      <div className="p-2 bg-gray-50 rounded-lg group-hover:scale-110 transition-transform duration-300">
-        <Icon icon={icon} width="28" height="28" />
+    <li className="flex items-center space-x-3 group">
+      <div className="p-2 bg-slate-950/80 border border-slate-850 rounded-xl group-hover:scale-108 group-hover:border-purple-500/25 group-hover:bg-slate-900 transition-all duration-300">
+        <Icon icon={icon} width="22" height="22" />
       </div>
 
       <div className="w-full">
         <div className="flex justify-between mb-1">
-          <span className="font-semibold text-gray-700 text-sm tracking-wide">
+          <span className="font-bold text-slate-350 text-xs tracking-wide group-hover:text-white transition-colors">
             {name}
           </span>
-          <span className="text-xs font-bold text-purple-600">{level}</span>
+          <span className="text-[10px] font-black text-purple-400">{level}</span>
         </div>
 
-        <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden border border-gray-200/50">
+        <div className="w-full bg-slate-950 h-1.5 rounded-full overflow-hidden border border-slate-900/60">
           <div
-            className="h-full bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full transition-all duration-1000 ease-out"
+            className="h-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 rounded-full transition-all duration-1000 ease-out shadow-[0_0_8px_rgba(168,85,247,0.4)]"
             style={{ width: isVisible ? level : "0%" }}
           ></div>
         </div>
@@ -95,73 +96,83 @@ const Skills: React.FC = () => {
     <section
       ref={sectionRef}
       id="skills"
-      className="relative pt-24 pb-32 overflow-hidden bg-transparent"
+      className="relative pt-24 pb-32 overflow-hidden bg-[#0a0f1d]"
     >
-      {/* Abstract Background Blobs */}
-
-      <div className="absolute top-25 left-0 w-60 h-60 bg-black/10  rounded-[40%] blur-3xl -z-10"></div>
-
-      <div className="absolute bottom-25 right-10 w-72 h-72 bg-gray-900/10 rounded-[45%] blur-2xl -z-10"></div>
-
-      <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-yellow-50 rounded-full blur-3xl -z-10 -translate-x-1/2 -translate-y-1/2"></div>
-
-      {/* Smaller vector style badges (like your image) */}
-
-      <div className="absolute right-0 top-40 w-28 h-40 bg-yellow-200 rounded-3xl opacity-40 rotate-12 -z-10"></div>
-
-      <div className="absolute left-0 bottom-60 w-20 h-32 bg-yellow-200 rounded-full opacity-30 rotate-[25deg] -z-10"></div>
+      {/* Background Blobs */}
+      <div className="absolute top-24 left-0 w-80 h-80 bg-purple-600/10 rounded-full filter blur-[100px] -z-10 animate-pulse-glow"></div>
+      <div className="absolute bottom-24 right-10 w-96 h-96 bg-blue-600/10 rounded-full filter blur-[120px] -z-10 animate-pulse-glow"></div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
           <div
             className={`inline-block transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           >
-            <h2 className="text-4xl font-extrabold text-gray-800 mb-2">
+            <h2 className="text-4xl font-extrabold text-white mb-3">
               Technical Expertise
             </h2>
-            <div className="h-1.5 w-20 bg-gradient-to-r from-purple-600 to-fuchsia-600 mx-auto rounded-full" />
-            <p className="text-gray-500 mt-4 max-w-md mx-auto">
-              A specialized toolset focused on building high-performance web and
-              mobile applications.
+            <div className="h-1.5 w-20 bg-gradient-to-r from-purple-600 to-fuchsia-600 mx-auto rounded-full shadow-[0_2px_10px_rgba(168,85,247,0.4)]" />
+            <p className="text-slate-400 mt-5 max-w-md mx-auto text-base">
+              A chronological software engineering pipeline highlighting my design-to-deployment skillsets.
             </p>
           </div>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {/* Connected Development Flow Layout */}
+        <div className="flex flex-col lg:flex-row items-center lg:items-stretch justify-center gap-6 lg:gap-3 xl:gap-5">
           {skills.map((group, index) => (
-            <div
-              key={group.category}
-              style={{ transitionDelay: `${index * 150}ms` }}
-              className={`bg-white/70 backdrop-blur-sm p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-500
-                ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}
-                ${index === 3 ? "lg:col-start-2" : ""}
-              `}
-            >
-              <h3 className="text-lg font-bold text-gray-800 mb-8 flex items-center gap-2">
-                <span className="w-8 h-1 bg-purple-600 rounded-full"></span>
-                {group.category}
-              </h3>
+            <React.Fragment key={group.category}>
+              {/* Stage Card */}
+              <div
+                style={{ transitionDelay: `${index * 120}ms` }}
+                className={`w-full lg:w-[22%] glass-panel glass-panel-hover p-6 rounded-3xl flex flex-col justify-between shadow-lg relative transition-all duration-1000
+                  ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}
+                `}
+              >
+                <div>
+                  {/* Category Header */}
+                  <h3 className="text-sm font-black text-white mb-2 flex items-center gap-2.5">
+                    <span className="w-6 h-1 bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full"></span>
+                    {group.category}
+                  </h3>
+                  
+                  {/* Category Description */}
+                  <p className="text-[11px] text-slate-450 leading-relaxed mb-6 font-medium">
+                    {group.description}
+                  </p>
 
-              <ul className="space-y-6">
-                {group.items.map((item) => (
-                  <SkillBar key={item.name} {...item} isVisible={isVisible} />
-                ))}
-              </ul>
-            </div>
+                  {/* Items List */}
+                  <ul className="space-y-5">
+                    {group.items.map((item) => (
+                      <SkillBar key={item.name} {...item} isVisible={isVisible} />
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Connecting Chevron (Hidden after last card) */}
+              {index < 3 && (
+                <div
+                  className={`flex items-center justify-center text-purple-500/40 my-3 lg:my-0 lg:mx-0.5 rotate-90 lg:rotate-0 transition-all duration-1000 delay-500
+                    ${isVisible ? "opacity-100 scale-100 animate-pulse" : "opacity-0 scale-50"}`}
+                >
+                  <Icon icon="mdi:chevron-double-right" className="text-3xl" />
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
       </div>
 
       {/* Bottom Wave Divider */}
-      <div className="absolute bottom-0 left-0 right-0 leading-[0] pointer-events-none">
+      <div className="absolute bottom-0 left-0 right-0 leading-[0] pointer-events-none z-10">
         <svg
-          className="relative block w-full h-20"
+          className="relative block w-full h-16 md:h-20"
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
         >
           <path
             d="M1200 120L0 120L0 0C166.667 60 333.333 90 500 90C666.667 90 833.333 60 1200 0V120Z"
-            className="fill-slate-50"
+            className="fill-[#0c1020]"
           ></path>
         </svg>
       </div>

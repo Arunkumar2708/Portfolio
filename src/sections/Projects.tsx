@@ -96,79 +96,83 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({
   return (
     <div
       ref={cardRef}
-      className={`bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-1000 border-2 border-gray-200 overflow-hidden 
+      className={`glass-panel relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:border-purple-500/30 hover:shadow-[0_20px_45px_rgba(168,85,247,0.18)] group
         ${isCardVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-16 scale-95"}
       `}
     >
-      {/* Project Thumbnail */}
-      <div className="overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-48 object-cover transition-transform duration-500 hover:scale-110"
-        />
-      </div>
-      {/* Content */}
-      <div className="p-6 text-left">
-        <h3 className="text-xl font-semibold text-gray-700">{project.title}</h3>
+      {/* Sliding diagonal sheen overlay */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/8 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none z-30"></div>
 
-        <div className="relative mt-2">
+      {/* Inset rounded project image */}
+      <div className="p-4 pb-0 relative overflow-hidden z-20">
+        <div className="relative overflow-hidden rounded-2xl h-48 shadow-lg bg-slate-950/40">
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80 z-10"></div>
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-6 text-left relative z-20">
+        <h3 className="text-xl font-extrabold text-white group-hover:text-purple-400 transition-colors duration-300">
+          {project.title}
+        </h3>
+
+        <div className="mt-3">
           <div
-            className={`transition-all duration-700 ease-in-out overflow-hidden ${
+            className={`transition-all duration-500 ease-in-out overflow-hidden ${
               isExpanded ? "max-h-[500px]" : "max-h-[4.5rem]"
-            }`} // 4.5rem is roughly 3 lines of text
+            }`}
           >
             <p
-              className={`text-gray-600 text-sm leading-relaxed ${!isExpanded && "line-clamp-3"}`}
+              className={`text-slate-350 text-sm leading-relaxed ${!isExpanded && "line-clamp-3"}`}
             >
               {project.description}
             </p>
           </div>
 
-          {/* Corner Button Wrapper */}
-          <div
-            className={`flex justify-end ${!isExpanded ? "absolute bottom-0.5 right-0" : "mt-2"}`}
-          >
-            {/* Subtle gradient background only when collapsed to hide text under the button */}
-            <div
-              className={`${!isExpanded ? "bg-gradient-to-l from-white via-white/100 to-transparent pl-10" : ""}`}
+          {/* Read More button */}
+          <div className="flex justify-end mt-2">
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="text-xs font-extrabold text-purple-450 hover:text-purple-300 transition-colors cursor-pointer flex items-center gap-0.5"
             >
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="text-xs font-extrabold text-blue-600 hover:text-purple-700 transition-colors cursor-pointer flex items-center gap-0.5"
-              >
-                {isExpanded ? (
-                  <>
-                    Show Less <Icon icon="mdi:chevron-up" />
-                  </>
-                ) : (
-                  <>... Read More</>
-                )}
-              </button>
-            </div>
+              {isExpanded ? (
+                <>
+                  Show Less <Icon icon="mdi:chevron-up" />
+                </>
+              ) : (
+                <>Read More <Icon icon="mdi:chevron-down" /></>
+              )}
+            </button>
           </div>
         </div>
-        {/* Tech Used */}
-        <div className="flex flex-wrap gap-2 mt-3">
+
+        {/* Translucent Tech Badges */}
+        <div className="flex flex-wrap gap-1.5 mt-5">
           {project.tech.map((t, i) => (
             <span
               key={i}
-              className="bg-blue-50 text-blue-600 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider"
+              className="bg-white/5 border border-white/8 text-purple-300 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md shadow-sm"
             >
               {t}
             </span>
           ))}
         </div>
-        {/* Links */}
-        <div className="flex gap-4 mt-5">
+
+        {/* Buttons */}
+        <div className="flex gap-3 mt-6">
           {project.demoLink && (
             <a
               href={project.demoLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-800"
+              className="flex items-center gap-1.5 text-xs font-bold text-white bg-gradient-to-r from-purple-600/80 to-fuchsia-600/80 border border-purple-500/20 px-4.5 py-2.5 rounded-xl hover:from-purple-500 hover:to-fuchsia-500 hover:shadow-lg hover:shadow-purple-500/20 active:scale-95 transition-all cursor-pointer"
             >
-              <Icon icon="mdi:open-in-new" width="18" /> Live
+              <Icon icon="mdi:open-in-new" width="16" /> <span>Live Demo</span>
             </a>
           )}
           {project.githubLink && (
@@ -176,9 +180,9 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({
               href={project.githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-black"
+              className="flex items-center gap-1.5 text-xs font-bold text-slate-200 border border-white/10 bg-white/5 hover:bg-white/10 hover:text-white px-4.5 py-2.5 rounded-xl active:scale-95 transition-all cursor-pointer"
             >
-              <Icon icon="mdi:github" width="18" /> GitHub
+              <Icon icon="mdi:github" width="16" /> <span>GitHub</span>
             </a>
           )}
         </div>
@@ -192,16 +196,16 @@ const Projects: React.FC = () => {
   return (
     <section
       id="projects"
-      className="pb-16 pt-20 relative bg-slate-50 overflow-hidden "
+      className="pb-24 pt-20 relative bg-[#0c1020] overflow-hidden"
     >
       {/* Background Blobs */}
-      <div className="absolute top-40 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-purple-100 rounded-full blur-[120px] opacity-60" />
-      <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-fuchsia-100 rounded-full blur-[120px] opacity-60" />
+      <div className="absolute top-40 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px] opacity-60 animate-pulse-glow" />
+      <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] opacity-60 animate-pulse-glow" />
 
       <div className="container mx-auto px-6 text-center relative z-10">
-        <div className="inline-block mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-2">Projects</h2>
-          <div className="h-1.5 w-16 bg-gradient-to-r from-purple-600 to-fuchsia-600 mx-auto rounded-full" />
+        <div className="inline-block mb-16">
+          <h2 className="text-4xl font-extrabold text-white mb-3">Projects</h2>
+          <div className="h-1.5 w-16 bg-gradient-to-r from-purple-600 to-fuchsia-600 mx-auto rounded-full shadow-[0_2px_10px_rgba(168,85,247,0.4)]" />
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 ">

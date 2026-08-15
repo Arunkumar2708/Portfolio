@@ -3,70 +3,82 @@ import { Icon } from "@iconify/react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-8">
-      <div className="container mx-auto px-6 text-center md:text-left">
-  {/* Quick Links */}
-        <h3 className="text-lg text-center font-semibold text-white mb-3 underline underline-offset-3">Quick Links</h3>
-        
-          <div className="flex justify-around pb-4">
-            
-            <ul className="space-y-2 flex text-center justify-around w-full font-semibold ">
+    <footer className="bg-[#060913] text-slate-400 border-t border-slate-900/80 py-10 relative z-10">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-900/60">
+          {/* Logo / Branding */}
+          <div className="text-center md:text-left">
+            <a href="#home" className="text-lg font-black tracking-wider bg-gradient-to-r from-purple-400 to-fuchsia-400 bg-clip-text text-transparent">
+              ARUN.DEV
+            </a>
+            <p className="text-xs text-slate-500 mt-1 max-w-xs">
+              Designing intuitive interfaces and crafting modern frontend solutions.
+            </p>
+          </div>
+          
+          {/* Quick Links */}
+          <div>
+            <ul className="flex flex-wrap justify-center gap-6 font-semibold text-xs text-slate-400">
               <li>
-                <a href="#" className="hover:text-blue-400">Home</a>
+                <a href="#home" className="hover:text-purple-400 transition-colors">Home</a>
               </li>
               <li>
-                <a href="#about" className="hover:text-blue-400">About</a>
+                <a href="#about" className="hover:text-purple-400 transition-colors">About</a>
               </li>
               <li>
-                <a href="#projects" className="hover:text-blue-400">Projects</a>
+                <a href="#skills" className="hover:text-purple-400 transition-colors">Skills</a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-blue-400">Contact</a>
+                <a href="#projects" className="hover:text-purple-400 transition-colors">Projects</a>
+              </li>
+              <li>
+                <a href="#contact" className="hover:text-purple-400 transition-colors">Contact</a>
               </li>
             </ul>
           </div>
-          <div className="grid md:grid-cols-2 gap-8 items-center border-t border-gray-700 pt-5">
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6">
           {/* Copyright */}
-          <div className="text-center md:text-center  items-center justify-center">
-            <p className="text-sm">
-              © {new Date().getFullYear()} <span className="font-semibold text-white">Designed By Arunkumar</span>.  
+          <div className="text-center sm:text-left order-2 sm:order-1">
+            <p className="text-xs text-slate-500">
+              © {new Date().getFullYear()} <span className="font-bold text-slate-450 hover:text-white transition-colors">Arun Kumar</span>. All rights reserved.
             </p>
           </div>
 
           {/* Social Media */}
-          <div className="flex justify-center md:justify-end gap-6">
-            <a
-              href="https://linkedin.com/in/arun-kumar-a-513ba7226"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-500 transition"
-            >
-              <Icon icon="mdi:linkedin" width="24" />
-            </a>
-            <a
-              href="https://github.com/Arunkumar2708"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-gray-100 transition"
-            >
-              <Icon icon="mdi:github" width="24" />
-            </a>
-             <a
-              href="https://www.instagram.com/arun_kumar_27_?igsh=MTN5cXN2dGIydHBkOQ=="
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-pink-400 transition"
-            >
-              <Icon icon="mdi:instagram" width="24" />
-            </a>
-           {/* <a
-              href="https://behance.net/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-400 transition"
-            >
-              <Icon icon="mdi:behance" width="24" />
-            </a> */}
+          <div className="flex justify-center gap-3 order-1 sm:order-2">
+            {[
+              {
+                id: "linkedin",
+                icon: "mdi:linkedin",
+                url: "https://linkedin.com/in/arun-kumar-a-513ba7226",
+                hover: "hover:text-[#0077b5] hover:border-[#0077b5]/30 hover:bg-[#0077b5]/10"
+              },
+              {
+                id: "github",
+                icon: "mdi:github",
+                url: "https://github.com/Arunkumar2708",
+                hover: "hover:text-white hover:border-slate-705 hover:bg-slate-800"
+              },
+              {
+                id: "instagram",
+                icon: "mdi:instagram",
+                url: "https://www.instagram.com/arun_kumar_27_?igsh=MTN5cXN2dGIydHBkOQ==",
+                hover: "hover:text-pink-400 hover:border-pink-400/30 hover:bg-pink-450/10"
+              }
+            ].map((social) => (
+              <a
+                key={social.id}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`w-9 h-9 rounded-xl bg-slate-950 border border-slate-900/60 flex items-center justify-center text-slate-400 transition-all duration-300 ${social.hover} cursor-pointer`}
+                aria-label={social.id}
+              >
+                <Icon icon={social.icon} width="18" />
+              </a>
+            ))}
           </div>
         </div>
       </div>
